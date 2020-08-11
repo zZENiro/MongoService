@@ -4,37 +4,30 @@ using MongoDB.Bson;
 using MongoDB.Driver.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MongoManagerApp
 {
-    public interface IGettable<T>
-    {
-        T GetAll();
-        T GetAllAsync();
-    }
-
-    public interface ICratable<T>
-    {
-        Task<T> CreateOneAsync();
-        Task<T> CreateManyAsync();
-        T CreateMany(params T[] values);
-        T CreateOne(T value);
-    }
-
     public abstract class MongoService<T> :
-        IGettable<T>, ICratable<T>
+        IGettable<T>, ICreatable<T>
         where T : class
     {
         protected IMongoDatabase _database;
         protected IMongoClient _client;
         protected IMongoCollection<T> _collection;
-       
-        public MongoService(IMongoSettings settings)
+        private MongoSettings _settings;
+
+        public MongoService(MongoSettings settings)
         {
-            _client = new MongoClient(settings.ConnectionString);
-            _database = _client.GetDatabase(settings.DatabaseName);
-            _collection = _database.GetCollection<T>(settings.CollectionName);
+            _settings = settings;
+            if (_settings is null) throw new Exception();
+
+            _client = new MongoClient(_settings.ConnectionString);
+            _database = _client.GetDatabase(_settings.DatabaseName);
+            _collection = _database.GetCollection<T>(_settings.CollectionName);
         }
+
+        public MongoSettings Settings { get => _settings; set => _settings = value; }
 
         public List<T> Get() =>
             _collection.Find(one => true).ToList();
@@ -43,6 +36,36 @@ namespace MongoManagerApp
         {
             _collection.InsertOne(value);
             return value;
+        }
+
+        public T GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public T GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> CreateOneAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> CreateManyAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public T CreateMany(params T[] values)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T CreateOne(T value)
+        {
+            throw new NotImplementedException();
         }
     }
 }

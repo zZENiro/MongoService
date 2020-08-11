@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 namespace MongoManagerApp
 {
-    public interface ICratable<T>
+    public interface ICreatable<T>
     {
         Task<T> CreateOneAsync();
         Task<T> CreateManyAsync();
