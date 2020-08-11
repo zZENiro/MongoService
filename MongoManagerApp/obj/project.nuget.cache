@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "gSOCrN9f7xDgMi5obEtpp1Kv/SHXOtl+D9r2lj8e94vUWzbHr0FUG02H94HpqH98Xd7orgpuVMPOrT99agV3uQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\zZEN\\Desktop\\MongoManager\\MongoManagerApp\\MongoManagerApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\zZEN\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\zZEN\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
